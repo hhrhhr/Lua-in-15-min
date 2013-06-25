@@ -1,73 +1,72 @@
--- Two dashes start a one-line comment.
+-- Два минуса начинают однострочный коментарий.
 
 --[[
-     Adding two ['s and ]'s makes it a
-     multi-line comment.
+     Добавление пары квадратных скобокAdding
+     делают коментарий многострочным.
 --]]
 
 ----------------------------------------------------
--- 1. Variables and flow control.
+-- 1. Переменные (и управление потоком)
 ----------------------------------------------------
 
-num = 42  -- All numbers are doubles.
--- Don't freak out, 64-bit doubles have 52 bits for
--- storing exact int values; machine precision is
--- not a problem for ints that need < 52 bits.
+num = 42  -- Все числа имеют тип doubles.
+-- Не волнуйтесь, 64-битный double имеет 52 бита
+-- для представления целой части;
 
-s = 'walternate'  -- Immutable strings like Python.
-t = "double-quotes are also fine"
-u = [[ Double brackets
-       start and end
-       multi-line strings.]]
-t = nil  -- Undefines t; Lua has garbage collection.
+s = 'walternate'  -- неизменяемая строка (как в python)
+t = "также можно использовать двойные кавычки"
+u = [[ двойные квадратные скобки
+       начинают и заканчивают
+       многострочные строки.]]
+t = nil  -- разопределить t; в Lua есть сборщик мусора.
 
--- Blocks are denoted with keywords like do/end:
+-- Блоки обозначаются ключевыми словами:
 while num < 50 do
-  num = num + 1  -- No ++ or += type operators.
+  num = num + 1  -- в Lua нет операторов инкремента ++ или += .
 end
 
--- If clauses:
+-- использование If:
 if num > 40 then
   print('over 40')
-elseif s ~= 'walternate' then  -- ~= is not equals.
-  -- Equality check is == like Python; ok for strs.
-  io.write('not over 40\n')  -- Defaults to stdout.
+elseif s ~= 'walternate' then  -- ~= обозначает "не равно".
+  -- Проверка равенства == как в Python; используется также для строк.
+  io.write('not over 40\n')  -- вывод в stdout.
 else
-  -- Variables are global by default.
-  thisIsGlobal = 5  -- Camel case is common.
+  -- Переменные глобальные по-умолчанию.
+  thisIsGlobal = 5  -- иногда используется Camel case.
 
-  -- How to make a variable local:
-  local line = io.read()  -- Reads next stdin line.
+  -- Теперь создадим локальную переменную:
+  local line = io.read()  -- читаем следующую строку из stdin.
 
-  -- String concatenation uses the .. operator:
+  -- Конкатенация строк производится оператором .. :
   print('Winter is coming, ' .. line)
 end
 
--- Undefined variables return nil.
--- This is not an error:
-foo = anUnknownVariable  -- Now foo = nil.
+-- Непоределенные переменные возвращают nil.
+-- Это не ошибка:
+foo = anUnknownVariable  -- теперь foo = nil.
 
 aBoolValue = false
 
--- Only nil and false are falsy; 0 and '' are true!
+-- Только типы nil и false являются "ложью"; 0 и '' есть "истина"!
 if not aBoolValue then print('twas false') end
 
--- 'or' and 'and' are short-circuited.
--- This is similar to the a?b:c operator in C/js:
+-- 'or' и 'and' являются короткозамкнутыми.
+-- Следующий пример равнозначен оператору a?b:c в C/js:
 ans = aBoolValue and 'yes' or 'no'  --> 'no'
 
 karlSum = 0
-for i = 1, 100 do  -- The range includes both ends.
+for i = 1, 100 do  -- Диапазон включает оба значения.
   karlSum = karlSum + i
 end
 
--- Use "100, 1, -1" as the range to count down:
+-- Используйте "100, 1, -1" для обратного хода:
 fredSum = 0
 for j = 100, 1, -1 do fredSum = fredSum + j end
 
--- In general, the range is begin, end[, step].
+-- В общем диапазон состоит из begin, end[, step].
 
--- Another loop construct:
+-- Другой вид цикла:
 repeat
   print('the way of the future')
   num = num - 1
